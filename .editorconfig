@@ -1,0 +1,25 @@
+# editorconfig.org
+
+root = true
+
+# All Files
+[*]
+charset                   = utf-8
+end_of_line               = crlf
+indent_style              = space
+
+# Markdown Files (README)
+[*.md]
+trim_trailing_whitespace  = false
+insert_final_newline      = true
+
+# ASL files (AutoSplitter Script)
+[*.asl]
+indent_size               = 4
+indent_style              = space
+insert_final_newline      = true
+trim_trailing_whitespace  = true
+
+# XML format files (Cheat Table & Splits Files)
+[*.{CT, lss}]
+indent_size               = 2
