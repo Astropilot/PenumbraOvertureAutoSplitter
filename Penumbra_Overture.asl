@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------
 //  About: Load Remover & Auto Splitter
 //  Author: MagicALCN, Astropilot, Kotti, PsychoManiac
-//  Version: 1.1
-//  Last Release Date: 20 December 2020
+//  Version: 1.2
+//  Last Release Date: 11 March 2021
 //  Repository: https://github.com/Astropilot/PenumbraOvertureAutoSplitter
 //---------------------------------------------------------------------------
 
@@ -95,8 +95,14 @@ update
     values during loading that would otherwise be added to the internal timer.
     The ambient color is set to 0 during loading, otherwise it is in the range ]0; 1].
     */
-    if (current.ambient_color > 0)
-        vars.ingame_time += TimeSpan.FromSeconds(current.game_time) - TimeSpan.FromSeconds(old.game_time);
+    if (current.ambient_color > 0) {
+        var incremental_time = TimeSpan.FromSeconds(current.game_time) - TimeSpan.FromSeconds(old.game_time);
+
+        // It prevents the addition of a negative value (can happen while loading a save on some maps)
+        if (incremental_time.Ticks > 0) {
+            vars.ingame_time += incremental_time;
+        }
+    }
 }
 
 gameTime
